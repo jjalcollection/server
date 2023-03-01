@@ -3,9 +3,11 @@ package com.example.server.jjal.domain;
 
 import com.example.server.jjal.dto.GetJjalListResponse;
 import com.example.server.jjal.dto.GetJjalResponse;
+import com.example.server.jjal.common.domain.BaseTimeEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,9 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Jjal {
+@Builder
+@AllArgsConstructor
+public class Jjal extends BaseTimeEntity {
 
     @Id
     @GeneratedValue
@@ -25,13 +29,10 @@ public class Jjal {
     @Column
     private String image;
 
-
+ 
     public Jjal(Long id, String image){
         this.id = id;
         this.image = image;
     }
-
-
-
 
 }

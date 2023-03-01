@@ -4,10 +4,13 @@ package com.example.server.jjal.contoller;
 import com.example.server.jjal.domain.Jjal;
 import com.example.server.jjal.dto.GetJjalListResponse;
 import com.example.server.jjal.dto.GetJjalResponse;
+import com.example.server.jjal.dto.CreateJjalRequest;
+import com.example.server.jjal.dto.CreateJjalResponse;
+import com.example.server.jjal.repository.JjalRepository;
 import com.example.server.jjal.service.JjalService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;l
 import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +26,12 @@ public class JjalController {
 
     @Operation(description = "게시물 업로드")
     @PostMapping("/jjal")
-    public ResponseEntity uploadPost(){
-
-        return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity<CreateJjalResponse> uploadPost(@RequestBody CreateJjalRequest createJjalRequest) {
+        jjalService.createJjal(createJjalRequest.getImage());
+        CreateJjalResponse response = CreateJjalResponse.builder().message("이미지 업로드에 성공했습니다.").build();
+        return new ResponseEntity(response, HttpStatus.OK);
     }
+    
 
     @Operation(description = "이미지 업로드")
     @PostMapping("/jjal/img")
@@ -72,3 +77,4 @@ public class JjalController {
 
 
 }
+

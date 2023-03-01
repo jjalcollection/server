@@ -8,9 +8,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Optional;
-
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,4 +36,15 @@ public class JjalService {
 
         return jjals;
     }
+
+    public Long createJjal(String image) {
+        Jjal jjal = Jjal.builder()
+                .image(image)
+                .build();
+
+        jjalRepository.save(jjal);
+
+        return jjal.getId();
+    }
+
 }
