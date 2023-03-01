@@ -1,4 +1,4 @@
-package com.example.server.config.common;
+package com.example.server.image;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
