@@ -18,7 +18,7 @@ public class GetJjalResponse {
 
 
     @Builder
-    public GetJjalResponse(Long id, String image,List<String> tags){
+    public GetJjalResponse(Long id, String image){
         this.id = id;
         this.image = image;
     }

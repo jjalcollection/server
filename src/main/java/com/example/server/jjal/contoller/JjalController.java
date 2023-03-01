@@ -10,7 +10,7 @@ import com.example.server.jjal.repository.JjalRepository;
 import com.example.server.jjal.service.JjalService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;l
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +49,6 @@ public class JjalController {
         GetJjalResponse getJjalResponse = GetJjalResponse.builder()
                 .id(jjal.getId())
                 .image(jjal.getImage())
-                .tags(null)
                 .build();
 
         return new ResponseEntity(getJjalResponse,HttpStatus.OK);
@@ -73,7 +72,6 @@ public class JjalController {
 
         return new ResponseEntity(HttpStatus.OK);
     }
-
 
 
 }

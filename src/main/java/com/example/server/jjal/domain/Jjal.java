@@ -29,10 +29,5 @@ public class Jjal extends BaseTimeEntity {
     @Column
     private String image;
 
- 
-    public Jjal(Long id, String image){
-        this.id = id;
-        this.image = image;
-    }
 
 }
