@@ -6,10 +6,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CreateJjalRequest {
     @Schema(description = "짤방 이미지")
     private String image;
+
+    private Set<String> tags;
 }
+

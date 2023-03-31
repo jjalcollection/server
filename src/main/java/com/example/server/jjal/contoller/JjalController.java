@@ -2,6 +2,7 @@ package com.example.server.jjal.contoller;
 
 
 import com.example.server.jjal.domain.Jjal;
+import com.example.server.jjal.domain.Tag;
 import com.example.server.jjal.dto.GetJjalListResponse;
 import com.example.server.jjal.dto.GetJjalResponse;
 import com.example.server.jjal.dto.CreateJjalRequest;
@@ -27,22 +28,22 @@ public class JjalController {
     @Operation(description = "게시물 업로드")
     @PostMapping("/jjal")
     public ResponseEntity<CreateJjalResponse> uploadPost(@RequestBody CreateJjalRequest createJjalRequest) {
-        jjalService.createJjal(createJjalRequest.getImage());
+        jjalService.createJjal(createJjalRequest.getImage(), createJjalRequest.getTags());
         CreateJjalResponse response = CreateJjalResponse.builder().message("이미지 업로드에 성공했습니다.").build();
         return new ResponseEntity(response, HttpStatus.OK);
     }
-    
+
 
     @Operation(description = "이미지 업로드")
     @PostMapping("/jjal/img")
-    public ResponseEntity uploadImage(){
+    public ResponseEntity uploadImage() {
 
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @Operation(description = "게시물 상세조회")
     @GetMapping("/jjal/{JjjalId}")
-    public ResponseEntity<GetJjalResponse> getJjal(@PathVariable Long JjalId){
+    public ResponseEntity<GetJjalResponse> getJjal(@PathVariable Long JjalId) {
 
         Jjal jjal = jjalService.getJjal(JjalId);
 
@@ -51,14 +52,14 @@ public class JjalController {
                 .image(jjal.getImage())
                 .build();
 
-        return new ResponseEntity(getJjalResponse,HttpStatus.OK);
+        return new ResponseEntity(getJjalResponse, HttpStatus.OK);
     }
 
     @Operation(description = "게시물 리스트 조회")
     @GetMapping("/jjals")
-    public ResponseEntity<Slice<GetJjalResponse>> getJjalList(@RequestParam int page, @RequestParam int size) {
+    public ResponseEntity<Slice<GetJjalResponse>> getJjalList(@RequestParam(required = false) Tag tag, @RequestParam int page, @RequestParam int size) {
 
-        Slice<Jjal> jjals = jjalService.getJjalList(page, size);
+        Slice<Jjal> jjals = jjalService.getJjalList(tag, page, size);
 
         Slice<GetJjalResponse> jjalResponses = jjals.map(jjal -> new GetJjalResponse(jjal));
 
@@ -67,7 +68,7 @@ public class JjalController {
 
     @Operation(description = "이미지 다운로드")
     @GetMapping("/jjal/img")
-    public ResponseEntity downloadImage(){
+    public ResponseEntity downloadImage() {
 
 
         return new ResponseEntity(HttpStatus.OK);
